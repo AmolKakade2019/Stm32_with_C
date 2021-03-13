@@ -1,0 +1,49 @@
+.PHONY : INFORMATION MKDIRS Clean all Flash_File Application
+$(warning ----------------File includes----------------)
+include Make_000_Flags.gmk
+$(warning ----------------File includes finished----------------)
+$(warning ----------------variable initialization----------------)
+
+ARM_GCC=arm-none-eabi-gcc
+ARM_CFLAGS = -mcpu=cortex-m4 -mthumb -std=gnu11 -flto -ffreestanding -nostdlib
+AVR_GCC = avr-gcc
+AVR_CFLAGS = -Os -DF_CPU=16000000UL -mmcu=atmega328p --std=c99
+
+ifeq ("$(TYPE_CC)","ARM")
+	CC=$(ARM_GCC)
+	CFLAGS=$(ARM_CFLAGS)
+else ifeq ($(TYPE_CC), AVR)
+	CC=$(AVR_GCC)
+	CFLAGS=$(AVR_CFLAGS)
+else
+	CC=ECC
+endif
+$(warning $(VPATH))
+$(warning ----------------variable initialization finished -----)
+
+all : INFORMATION MKDIRS $(target_dir)Application
+
+MKDIRS:
+	-$(shell mkdir $(obj_dir))
+
+INFORMATION:
+	@echo "Compiler $(CC)"
+	$(CC) --version
+
+$(target_dir)Application:  $(obj_dir)$(TYPE_CC)Startup.o 
+	@echo "Building $@"
+	$(CC) $(CFLAGS) -o $@ $^
+	@echo "Build Finished"
+
+$(obj_dir)%.o: %.c
+	@echo "compiling file  $^ "
+	$(CC) $(CFLAGS) -c $^ -o  $@
+	@echo "Compilation Finished"
+
+Flash_File:
+	#avrdude.exe -n -c arduino -p ATMEGA328P -U flash
+
+Clean:
+	@echo "Cleaning Files"
+	rm -f $(patsubst \,/,$(obj_dir))\*.o
+	@echo "Cleaning Finished"

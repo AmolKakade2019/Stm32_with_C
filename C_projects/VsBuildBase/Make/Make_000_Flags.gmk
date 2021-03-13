@@ -1,0 +1,9 @@
+current_dir=$(shell pwd)
+obj_dir = $(subst \,/,$(current_dir))/../Obj/
+target_dir = $(subst \,/,$(current_dir))/../bin/$(TYPE_CC)_Application/
+
+src_path = $(subst \,/,$(current_dir))/../CodeSrc/Appl/src;.;
+
+VPATH=$(src_path)
+
+

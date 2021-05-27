@@ -1,3 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\Make\Make_000_Flags.gmk">
+      <Filter>Makefile</Filter>
+    </None>
+    <None Include="..\Make\Makefile.gmk">
+      <Filter>Makefile</Filter>
+    </None>
+    <None Include="..\Build.bat" />
+    <None Include="..\Make\ARM_Application.ld">
+      <Filter>Makefile</Filter>
+    </None>
+    <None Include="..\Make\AVR_Application.ld">
+      <Filter>Makefile</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Makefile">
+      <UniqueIdentifier>{e4cdda3f-614f-4ab7-aa05-8942dcfd219a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Makefile\NewFilter1">
+      <UniqueIdentifier>{6e5a4bb7-077d-4642-b1bc-c3217aa2d627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc">
+      <UniqueIdentifier>{7f5d0ed7-ec15-41b7-969f-76faf9d0701a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Appl">
+      <UniqueIdentifier>{c3a0c8ce-3847-4f35-9719-8e4318d73449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Appl\inc">
+      <UniqueIdentifier>{2b40926e-71d7-40f3-b195-7962064790f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Appl\libs">
+      <UniqueIdentifier>{1a163449-94a1-40cf-8660-bff71a59c178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Appl\src">
+      <UniqueIdentifier>{6827215c-a2f8-4858-8499-8e54255c1852}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\CodeSrc\Appl\src\ARM_Application_Startup.c">
+      <Filter>CodeSrc\Appl\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CodeSrc\Appl\src\AVR_Application_Startup.c">
+      <Filter>CodeSrc\Appl\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CodeSrc\Appl\src\Initial.c">
+      <Filter>CodeSrc\Appl\src</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

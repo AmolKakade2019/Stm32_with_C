@@ -9,6 +9,14 @@
       <Configuration>ARM_Application</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="AVRDude_Read|Win32">
+      <Configuration>AVRDude_Read</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="AVRDude_Read|x64">
+      <Configuration>AVRDude_Read</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="AVR_Application|Win32">
       <Configuration>AVR_Application</Configuration>
       <Platform>Win32</Platform>
@@ -55,6 +63,11 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -71,6 +84,11 @@
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVR_Application|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|x64'" Label="Configuration">
     <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -94,6 +112,9 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='AVR_Application|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -104,6 +125,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='AVR_Application|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -128,25 +152,40 @@
     <NMakeBuildCommandLine>cd .. &amp; Build all AVR</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>cd .. &amp; Build Clean</NMakeCleanCommandLine>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|Win32'">
+    <NMakeOutput>VsBuildBase.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeBuildCommandLine>cd .. &amp; Build all AVR</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>cd .. &amp; Build Clean</NMakeCleanCommandLine>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <NMakeOutput>VsBuildBase.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
+    <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ARM_Application|x64'">
     <NMakeOutput>VsBuildBase.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeBuildCommandLine>cd .. &amp; Build all ARM</NMakeBuildCommandLine>
-    <NMakeCleanCommandLine>cd .. &amp; Build Clean</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>cd .. &amp; Build all $(Configuration)</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVR_Application|x64'">
     <NMakeOutput>VsBuildBase.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeBuildCommandLine>cd .. &amp; Build all AVR</NMakeBuildCommandLine>
-    <NMakeCleanCommandLine>cd .. &amp; Build Clean</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine>cd .. &amp; Build all $(Configuration)</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|x64'">
+    <NMakeOutput>VsBuildBase.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeBuildCommandLine>cd .. &amp; Build READ_ARDUINO_FLASH $(Configuration)</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
   </PropertyGroup>
@@ -159,6 +198,7 @@
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
+    <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ARM_Application|x64'">
     <BuildLog>
@@ -166,6 +206,11 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='AVR_Application|x64'">
+    <BuildLog>
+      <Path>$(SolutionDir)..\bin\$(Configuration)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|x64'">
     <BuildLog>
       <Path>$(SolutionDir)..\bin\$(Configuration)\$(MSBuildProjectName).log</Path>
     </BuildLog>
@@ -181,14 +226,16 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\CodeSrc\Appl\AVRStartup.c" />
-    <ClCompile Include="..\CodeSrc\Appl\Initial.c" />
-    <ClCompile Include="..\CodeSrc\Appl\ARMStartup.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\CodeSrc\Appl\armGCC.ld" />
+    <None Include="..\Build.bat" />
+    <None Include="..\Make\ARM_Application.ld" />
+    <None Include="..\Make\AVR_Application.ld" />
     <None Include="..\Make\Makefile.gmk" />
     <None Include="..\Make\Make_000_Flags.gmk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\CodeSrc\Appl\src\ARM_Application_Startup.c" />
+    <ClCompile Include="..\CodeSrc\Appl\src\AVR_Application_Startup.c" />
+    <ClCompile Include="..\CodeSrc\Appl\src\Initial.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,13 +4,17 @@ include Make_000_Flags.gmk
 $(warning ----------------File includes finished----------------)
 $(warning ----------------variable initialization----------------)
 
+#-flto -ffreestanding 
 ARM_GCC=arm-none-eabi-gcc
-ARM_CFLAGS = -mcpu=cortex-m4 -mthumb -std=gnu11 -flto -ffreestanding -nostdlib
+ARM_CFLAGS = -mcpu=cortex-m4 -mthumb -std=gnu11 -nostdlib -Wall
+ARM_LFLAGS = -Wl,-Map=$@.map -Wl,-nostdlib -T ARM_Application.ld -o
 ARM_OBJ_DMP = arm-none-eabi-objdump
 ARM_OBJ_CPY = arm-none-eabi-objcopy
 
+
 AVR_GCC = avr-gcc
-AVR_CFLAGS = -O0 -DF_CPU=16000000UL -mmcu=atmega328p --std=c99 -nostdlib
+AVR_CFLAGS = -O0 -DF_CPU=16000000UL -mmcu=atmega328p --std=c99 -nostdlib -Wall
+AVR_LFLAGS = -Wl,-Map=$@.map -Wl,-verbose -o
 AVR_OBJ_DMP = avr-objdump
 AVR_OBJ_CPY = avr-objcopy
 
@@ -20,11 +24,13 @@ AVRDD_RFLAG = -c arduino -p ATMEGA328P -P COM3
 ifeq ($(VSConfig),ARM_Application)
 	CC=$(ARM_GCC)
 	CFLAGS=$(ARM_CFLAGS)
+	LFLAGS=$(ARM_LFLAGS)
 	OBJ_DMP = $(ARM_OBJ_DMP)
 	OBJ_CPY = $(ARM_OBJ_CPY)
 else ifeq ($(VSConfig),AVR_Application)
 	CC=$(AVR_GCC)
 	CFLAGS=$(AVR_CFLAGS)
+	LFLAGS=$(AVR_LFLAGS)
 	OBJ_DMP = $(AVR_OBJ_DMP)
 	OBJ_CPY = $(AVR_OBJ_CPY)
 else
@@ -46,7 +52,7 @@ INFORMATION:
 
 $(target_dir)Application:  $(obj_dir)$(VSConfig)_Startup.o 
 	@echo "Building $@"
-	$(CC) $(CFLAGS) -Wl,-Map=$@.map -Wl,-verbose -o $@ $^
+	$(CC) $(CFLAGS) $(LFLAGS) $@ $^
 	$(OBJ_CPY) -O ihex -j .data -j .text $@ $@.hex
 	$(OBJ_CPY) -O srec $@ $@.srec
 	@echo "Build Finished"
@@ -54,7 +60,7 @@ $(target_dir)Application:  $(obj_dir)$(VSConfig)_Startup.o
 $(obj_dir)%.o: %.c
 	@echo "compiling file  $^ "
 	$(CC) $(CFLAGS) -c $^ -o  $@
-	$(OBJ_DMP) -D $@
+	$(OBJ_DMP) -h $@
 	@echo "Compilation Finished"
 
 READ_ARDUINO_FLASH:

@@ -7,3 +7,4 @@ set PrjConfig=%2
 echo ------ Batch Arguments ----%BUILD_CMD%,%PrjConfig%,
 Make -C ./Make/ -f Makefile.gmk %BUILD_CMD% VSConfig=%PrjConfig%
 echo "Batch Finished"
+echo "creating dumps"

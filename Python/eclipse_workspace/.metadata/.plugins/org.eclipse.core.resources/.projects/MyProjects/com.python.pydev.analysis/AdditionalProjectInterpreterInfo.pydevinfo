@@ -1,0 +1,31 @@
+-- VERSION_5
+-- START DISKCACHE_2
+F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\.metadata\.plugins\org.eclipse.core.resources\.projects\MyProjects\com.python.pydev.analysis\v2_indexcache
+Common.Libs.OpenCV.VideoHandler|1576616556855934000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Common\Libs\OpenCV\VideoHandler.py
+Common.Libs.OpenCV.test|1630322165754277000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Common\Libs\OpenCV\test.py
+Common.Libs.OpenCV.ImageHandler|1576616556898822000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Common\Libs\OpenCV\ImageHandler.py
+Projects.Languages.German.verbs|1630322153002035000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Projects\Languages\German\verbs.py
+Common.__init__|1575809770714829000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Common\__init__.py
+Projects.__init__|1575809715090730000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Projects\__init__.py
+Common.Libs.OpenCV.__init__|1575809876752428000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Common\Libs\OpenCV\__init__.py
+Projects.Languages.German.__init__|1630317996441463000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Projects\Languages\German\__init__.py
+Projects.Languages.__init__|1630317970513956000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Projects\Languages\__init__.py
+Common.Libs.__init__|1575809793028491000|F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Common\Libs\__init__.py
+-- END DISKCACHE
+-- START DICTIONARY
+5
+5=ImageHandler
+3=F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Projects\Languages\German\verbs.py
+2=Common.Libs.OpenCV.ImageHandler
+1=F:\Repositories\BitBucket\AmolKakadeRepository\Python\eclipse_workspace\MyProjects\Common\Libs\OpenCV\ImageHandler.py
+4=Projects.Languages.German.verbs
+-- END DICTIONARY
+-- START TREE 1
+2
+ima|1|ImageHandler!1^9#7*17@
+ver|1|verbs_dict!3^19#1*35@
+-- END TREE
+-- START TREE 2
+1
+__i|1|__init__!5&1^14#9*18@
+-- END TREE

@@ -1,8 +1,8 @@
-.PHONY : INFORMATION MKDIRS Clean all READ_ARDUINO_FLASH Application WRITE_ARDUINO_FLASH
-$(warning ----------------File includes----------------)
+.PHONY : INFORMATION MKDIRS Clean all READ_ARDUINO_FLASH Application WRITE_ARDUINO_FLASH WRITE_ARM_FLASH
+$(warning Makefile.gmk: ----------------File includes----------------)
 include Make_000_Flags.gmk
-$(warning ----------------File includes finished----------------)
-$(warning ----------------variable initialization----------------)
+$(warning Makefile.gmk: ----------------File includes finished----------------)
+$(warning Makefile.gmk: ----------------variable initialization----------------)
 
 #-flto -ffreestanding 
 ARM_GCC=arm-none-eabi-gcc
@@ -10,7 +10,6 @@ ARM_CFLAGS = -mcpu=cortex-m4 -mthumb -std=gnu11 -nostdlib -Wall
 ARM_LFLAGS = -Wl,-Map=$@.map -Wl,-nostdlib -T ARM_Application.ld -o
 ARM_OBJ_DMP = arm-none-eabi-objdump
 ARM_OBJ_CPY = arm-none-eabi-objcopy
-
 
 AVR_GCC = avr-gcc
 AVR_CFLAGS = -O0 -DF_CPU=16000000UL -mmcu=atmega328p --std=c99 -nostdlib -Wall
@@ -27,50 +26,65 @@ ifeq ($(VSConfig),ARM_Application)
 	LFLAGS=$(ARM_LFLAGS)
 	OBJ_DMP = $(ARM_OBJ_DMP)
 	OBJ_CPY = $(ARM_OBJ_CPY)
+	FLASH_APP = WRITE_ARM_FLASH
 else ifeq ($(VSConfig),AVR_Application)
 	CC=$(AVR_GCC)
 	CFLAGS=$(AVR_CFLAGS)
 	LFLAGS=$(AVR_LFLAGS)
 	OBJ_DMP = $(AVR_OBJ_DMP)
 	OBJ_CPY = $(AVR_OBJ_CPY)
+	FLASH_APP = WRITE_ARDUINO_FLASH
 else
 	CC=UNDEF_CC
 endif
 
-$(warning Special message $(obj_dir)%.o)
-$(warning VPATH = $(src_path))
-$(warning ----------------variable initialization finished -----)
+#$(warning Makefile.gmk: Special message $(obj_dir)%.o)
+#$(warning Makefile.gmk: VPATH = $(src_path))
+$(warning Makefile.gmk: ----------------variable initialization finished -----)
 
-all : INFORMATION MKDIRS $(target_dir)Application WRITE_ARDUINO_FLASH
-
-MKDIRS:
-	-$(shell mkdir $(obj_dir))
+all : INFORMATION MKDIRS $(target_dir)Application $(FLASH_APP)
 
 INFORMATION:
+	@echo "Makefile.gmk: ----------------------- General information started-----------------------------------------"
 	@echo "Compiler $(CC)"
 	$(CC) --version
+	@echo "Makefile.gmk: ----------------------- General information End -----------------------------------------"
+
+MKDIRS:
+	@echo "Makefile.gmk: ----------------------- Making directories started-----------------------------------------"
+	-$(shell mkdir $(obj_dir))
+	@echo "Makefile.gmk: ----------------------- Making directories finished-----------------------------------------"
 
 $(target_dir)Application:  $(obj_dir)$(VSConfig)_Startup.o 
-	@echo "Building $@"
+	@echo "Makefile.gmk: ----------------------- Building $@ -----------------------------------------"
 	$(CC) $(CFLAGS) $(LFLAGS) $@ $^
 	$(OBJ_CPY) -O ihex -j .data -j .text $@ $@.hex
 	$(OBJ_CPY) -O srec $@ $@.srec
-	@echo "Build Finished"
+	@echo "Makefile.gmk: ----------------------- Building $@  Finished--------------------------------"
 
 $(obj_dir)%.o: %.c
-	@echo "compiling file  $^ "
+	@echo "Makefile.gmk: ---------------- compiling file  $^  ------------------------"
 	$(CC) $(CFLAGS) -c $^ -o  $@
 	$(OBJ_DMP) -h $@
-	@echo "Compilation Finished"
+	@echo "Makefile.gmk: -----------------Compilation Finished -----------------------"
 
 READ_ARDUINO_FLASH:
+	@echo "Makefile.gmk: ---------------- Reading from ARDUINO START ------------------------"
 	$(AVRDD) $(AVRDD_RFLAG)-n -U flash:r:$(target_dir)flash.bin:r
+	@echo "Makefile.gmk: ---------------- Reading from ARDUINO END ------------------------"
 
 WRITE_ARDUINO_FLASH:
+	@echo "Makefile.gmk: ---------------- Writing ARDUINO Flash START ------------------------"
 	$(AVRDD) $(AVRDD_RFLAG) -U flash:w:$(target_dir)Application.hex:i
+	@echo "Makefile.gmk: ---------------- Writing ARDUINO Flash END ------------------------"
+
+WRITE_ARM_FLASH:
+	@echo "Makefile.gmk: ---------------- Writing ARM Flash START ------------------------"
+	@echo "Writing Arm Flash is not yet developed !!"
+	@echo "Makefile.gmk: ---------------- Writing ARM Flash END ------------------------"
 
 Clean:
-	@echo "Cleaning Files"
+	@echo "Makefile.gmk: ---------------- Cleaning build START------------------------"
 	rm -rf $(patsubst \,/,$(obj_dir))\*.o
 	rm -rf $(patsubst \,/,$(target_dir))\*
-	@echo "Cleaning Finished"
+	@echo "Makefile.gmk: ---------------- Cleaning build Finished------------------------"

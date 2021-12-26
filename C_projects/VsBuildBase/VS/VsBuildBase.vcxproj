@@ -233,9 +233,14 @@
     <None Include="..\Make\Make_000_Flags.gmk" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\CodeSrc\Appl\src\ARM_Application_Startup.c" />
-    <ClCompile Include="..\CodeSrc\Appl\src\AVR_Application_Startup.c" />
-    <ClCompile Include="..\CodeSrc\Appl\src\Initial.c" />
+    <ClCompile Include="..\CodeSrc\ARM_Application\src\ARM_Application_Startup.c" />
+    <ClCompile Include="..\CodeSrc\ARM_Application\src\FaultAndIrqHandlers.c" />
+    <ClCompile Include="..\CodeSrc\AVR_Application\src\AVR_Application_Startup.c" />
+    <ClCompile Include="..\CodeSrc\Default\src\Initial.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\CodeSrc\ARM_Application\inc\ARM_Startup.h" />
+    <ClInclude Include="..\CodeSrc\ARM_Application\inc\EcuMemoryMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -25,28 +25,57 @@
     <Filter Include="CodeSrc">
       <UniqueIdentifier>{7f5d0ed7-ec15-41b7-969f-76faf9d0701a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CodeSrc\Appl">
+    <Filter Include="CodeSrc\ARM_Application">
+      <UniqueIdentifier>{b0980433-ae53-4508-81a6-4e9a770421f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\ARM_Application\inc">
+      <UniqueIdentifier>{12a72cc1-a167-41ab-856e-82a20d17b0c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\ARM_Application\src">
+      <UniqueIdentifier>{397933d7-86dc-42fd-9678-fc1eb2d3f099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\AVR_Application">
       <UniqueIdentifier>{c3a0c8ce-3847-4f35-9719-8e4318d73449}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CodeSrc\Appl\inc">
+    <Filter Include="CodeSrc\AVR_Application\inc">
       <UniqueIdentifier>{2b40926e-71d7-40f3-b195-7962064790f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CodeSrc\Appl\libs">
+    <Filter Include="CodeSrc\AVR_Application\libs">
       <UniqueIdentifier>{1a163449-94a1-40cf-8660-bff71a59c178}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CodeSrc\Appl\src">
+    <Filter Include="CodeSrc\AVR_Application\src">
       <UniqueIdentifier>{6827215c-a2f8-4858-8499-8e54255c1852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Default">
+      <UniqueIdentifier>{e49367b2-62c0-40fb-81d4-318a50bd9c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Default\inc">
+      <UniqueIdentifier>{ede23d86-b3b1-42af-abf6-6d5adf837133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Default\src">
+      <UniqueIdentifier>{0e706b22-66f2-4603-811e-4143c3509e9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\CodeSrc\Appl\src\ARM_Application_Startup.c">
-      <Filter>CodeSrc\Appl\src</Filter>
+    <ClCompile Include="..\CodeSrc\ARM_Application\src\ARM_Application_Startup.c">
+      <Filter>CodeSrc\ARM_Application\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\CodeSrc\Appl\src\AVR_Application_Startup.c">
-      <Filter>CodeSrc\Appl\src</Filter>
+    <ClCompile Include="..\CodeSrc\ARM_Application\src\FaultAndIrqHandlers.c">
+      <Filter>CodeSrc\ARM_Application\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\CodeSrc\Appl\src\Initial.c">
-      <Filter>CodeSrc\Appl\src</Filter>
+    <ClCompile Include="..\CodeSrc\AVR_Application\src\AVR_Application_Startup.c">
+      <Filter>CodeSrc\AVR_Application\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\CodeSrc\Default\src\Initial.c">
+      <Filter>CodeSrc\Default\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\CodeSrc\ARM_Application\inc\ARM_Startup.h">
+      <Filter>CodeSrc\ARM_Application\inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CodeSrc\ARM_Application\inc\EcuMemoryMap.h">
+      <Filter>CodeSrc\ARM_Application\inc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

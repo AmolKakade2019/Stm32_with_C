@@ -1,10 +1,14 @@
+echo OFF
 echo
 echo BATCH: -------------------- Batch START           --------------- 
-@echo %1
-@echo %2
+@echo Argument number and corresponding meaning 
+@echo 1: %1 (make command e.g. clean, all, or any other specific target name) :: used as 'BUILD_CMD'
+@echo 2: %2 (Project configuration being used in visual studio (specific to HW platform)) :: used as 'PrjConfig'
+@echo 3 and onwards: %3 (to be updated as per needs and future improvements)
+
 set BUILD_CMD=%1
 set PrjConfig=%2
-@echo 
+
 echo BATCH: -------------------- Batch Arguments START --------------- 
 echo BATCH: %BUILD_CMD%,%PrjConfig%,
 echo BATCH: -------------------- Batch Arguments END   --------------- 

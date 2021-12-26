@@ -55,7 +55,7 @@ MKDIRS:
 	-$(shell mkdir $(obj_dir))
 	@echo "Makefile.gmk: ----------------------- Making directories finished-----------------------------------------"
 
-$(target_dir)Application:  $(obj_dir)$(VSConfig)_Startup.o 
+$(target_dir)Application:  $(obj_dir)$(VSConfig)_Startup.o FaultAndIrqHandlers.o
 	@echo "Makefile.gmk: ----------------------- Building $@ -----------------------------------------"
 	$(CC) $(CFLAGS) $(LFLAGS) $@ $^
 	$(OBJ_CPY) -O ihex -j .data -j .text $@ $@.hex

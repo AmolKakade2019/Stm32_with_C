@@ -168,7 +168,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ARM_Application|x64'">
     <NMakeOutput>VsBuildBase.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeBuildCommandLine>cd .. &amp; Build all $(Configuration)</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>cd .. &amp; Build all $(Configuration) ARM</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
@@ -176,7 +176,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVR_Application|x64'">
     <NMakeOutput>VsBuildBase.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeBuildCommandLine>cd .. &amp; Build all $(Configuration)</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>cd .. &amp; Build all $(Configuration) AVR</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
@@ -184,7 +184,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AVRDude_Read|x64'">
     <NMakeOutput>VsBuildBase.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <NMakeBuildCommandLine>cd .. &amp; Build READ_ARDUINO_FLASH $(Configuration)</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>cd .. &amp; Build READ_ARDUINO_FLASH $(Configuration) AVR</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>cd .. &amp; Build Clean $(Configuration)</NMakeCleanCommandLine>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\bin\$(Configuration)\Temp\</IntDir>
@@ -227,10 +227,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\Build.bat" />
+    <None Include="..\CodeSrc\ARM_Application\MakeCfg\MkAppFIles.gmk" />
+    <None Include="..\CodeSrc\AVR_Application\MakeCfg\MkAppFIles.gmk" />
+    <None Include="..\CodeSrc\Default\MakeCfg\MkAppFIles.gmk" />
     <None Include="..\Make\ARM_Application.ld" />
     <None Include="..\Make\AVR_Application.ld" />
     <None Include="..\Make\Makefile.gmk" />
-    <None Include="..\Make\Make_000_Flags.gmk" />
+    <None Include="..\Make\MkPaths.gmk" />
+    <None Include="..\Make\MkPlatformDefinitions.gmk" />
+    <None Include="..\Make\MkSrcFIles.gmk" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\CodeSrc\ARM_Application\src\ARM_Application_Startup.c" />

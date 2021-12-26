@@ -1,0 +1,11 @@
+
+SRC_FILES = 
+include ../CodeSrc/$(VSConfig)/MakeCfg/MkAppFiles.gmk
+
+FILES = $(notdir $(SRC_FILES))
+OBJ_FILES = $(addsuffix .o, $(FILES))
+OBJ_FILES_WITH_PATH := $(addprefix $(obj_dir), $(OBJ_FILES))
+
+$(warning  MkSrcFiles.gmk included !)
+
+

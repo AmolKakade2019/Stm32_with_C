@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include="..\Make\Make_000_Flags.gmk">
-      <Filter>Makefile</Filter>
-    </None>
     <None Include="..\Make\Makefile.gmk">
       <Filter>Makefile</Filter>
     </None>
@@ -14,13 +11,28 @@
     <None Include="..\Make\AVR_Application.ld">
       <Filter>Makefile</Filter>
     </None>
+    <None Include="..\CodeSrc\ARM_Application\MakeCfg\MkAppFIles.gmk">
+      <Filter>CodeSrc\ARM_Application\MakeCfg</Filter>
+    </None>
+    <None Include="..\Make\MkPlatformDefinitions.gmk">
+      <Filter>Makefile</Filter>
+    </None>
+    <None Include="..\Make\MkPaths.gmk">
+      <Filter>Makefile</Filter>
+    </None>
+    <None Include="..\Make\MkSrcFIles.gmk">
+      <Filter>Makefile</Filter>
+    </None>
+    <None Include="..\CodeSrc\AVR_Application\MakeCfg\MkAppFIles.gmk">
+      <Filter>CodeSrc\AVR_Application\MakeCfg</Filter>
+    </None>
+    <None Include="..\CodeSrc\Default\MakeCfg\MkAppFIles.gmk">
+      <Filter>CodeSrc\Default\MakeCfg</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Makefile">
       <UniqueIdentifier>{e4cdda3f-614f-4ab7-aa05-8942dcfd219a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Makefile\NewFilter1">
-      <UniqueIdentifier>{6e5a4bb7-077d-4642-b1bc-c3217aa2d627}</UniqueIdentifier>
     </Filter>
     <Filter Include="CodeSrc">
       <UniqueIdentifier>{7f5d0ed7-ec15-41b7-969f-76faf9d0701a}</UniqueIdentifier>
@@ -40,9 +52,6 @@
     <Filter Include="CodeSrc\AVR_Application\inc">
       <UniqueIdentifier>{2b40926e-71d7-40f3-b195-7962064790f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CodeSrc\AVR_Application\libs">
-      <UniqueIdentifier>{1a163449-94a1-40cf-8660-bff71a59c178}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CodeSrc\AVR_Application\src">
       <UniqueIdentifier>{6827215c-a2f8-4858-8499-8e54255c1852}</UniqueIdentifier>
     </Filter>
@@ -54,6 +63,15 @@
     </Filter>
     <Filter Include="CodeSrc\Default\src">
       <UniqueIdentifier>{0e706b22-66f2-4603-811e-4143c3509e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\ARM_Application\MakeCfg">
+      <UniqueIdentifier>{dd27e9b2-820e-4932-b9aa-ea0ef4b2e38a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\AVR_Application\MakeCfg">
+      <UniqueIdentifier>{6a82a376-ba48-4a7e-92f1-7bbac5d67e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeSrc\Default\MakeCfg">
+      <UniqueIdentifier>{254bb55d-c206-4fd3-aead-03678f864ee2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

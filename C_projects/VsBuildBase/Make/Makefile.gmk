@@ -1,90 +1,69 @@
 .PHONY : INFORMATION MKDIRS Clean all READ_ARDUINO_FLASH Application WRITE_ARDUINO_FLASH WRITE_ARM_FLASH
-$(warning Makefile.gmk: ----------------File includes----------------)
-include Make_000_Flags.gmk
-$(warning Makefile.gmk: ----------------File includes finished----------------)
-$(warning Makefile.gmk: ----------------variable initialization----------------)
+$(warning  ----------------File includes----------------)
+include MkPlatformDefinitions.gmk
+include MkPaths.gmk
+include MkSrcFiles.gmk
 
-#-flto -ffreestanding 
-ARM_GCC=arm-none-eabi-gcc
-ARM_CFLAGS = -mcpu=cortex-m4 -mthumb -std=gnu11 -nostdlib -Wall
-ARM_LFLAGS = -Wl,-Map=$@.map -Wl,-nostdlib -T ARM_Application.ld -o
-ARM_OBJ_DMP = arm-none-eabi-objdump
-ARM_OBJ_CPY = arm-none-eabi-objcopy
+#$(warning  Special message $(obj_dir)%.o)
+#$(warning  VPATH = $(VPATH))
+#$(warning  SRC_FILES = $(SRC_FILES))
+#$(warning  FILES = $(FILES))
+#$(warning  OBJ_FILES = $(OBJ_FILES))
+#$(warning  OBJ_FILES_WITH_PATH = $(OBJ_FILES_WITH_PATH))
+$(warning  ----------------File includes finished----------------)
 
-AVR_GCC = avr-gcc
-AVR_CFLAGS = -O0 -DF_CPU=16000000UL -mmcu=atmega328p --std=c99 -nostdlib -Wall
-AVR_LFLAGS = -Wl,-Map=$@.map -Wl,-verbose -o
-AVR_OBJ_DMP = avr-objdump
-AVR_OBJ_CPY = avr-objcopy
+$(warning  ----------------variable initialization----------------)
 
-AVRDD = avrdude
-AVRDD_RFLAG = -c arduino -p ATMEGA328P -P COM3 
-
-ifeq ($(VSConfig),ARM_Application)
-	CC=$(ARM_GCC)
-	CFLAGS=$(ARM_CFLAGS)
-	LFLAGS=$(ARM_LFLAGS)
-	OBJ_DMP = $(ARM_OBJ_DMP)
-	OBJ_CPY = $(ARM_OBJ_CPY)
-	FLASH_APP = WRITE_ARM_FLASH
-else ifeq ($(VSConfig),AVR_Application)
-	CC=$(AVR_GCC)
-	CFLAGS=$(AVR_CFLAGS)
-	LFLAGS=$(AVR_LFLAGS)
-	OBJ_DMP = $(AVR_OBJ_DMP)
-	OBJ_CPY = $(AVR_OBJ_CPY)
-	FLASH_APP = WRITE_ARDUINO_FLASH
-else
-	CC=UNDEF_CC
-endif
-
-#$(warning Makefile.gmk: Special message $(obj_dir)%.o)
-#$(warning Makefile.gmk: VPATH = $(src_path))
-$(warning Makefile.gmk: ----------------variable initialization finished -----)
+$(warning  ----------------variable initialization finished -----)
 
 all : INFORMATION MKDIRS $(target_dir)Application $(FLASH_APP)
 
 INFORMATION:
-	@echo "Makefile.gmk: ----------------------- General information started-----------------------------------------"
+	@echo " ----------------------- General information started-----------------------------------------"
 	@echo "Compiler $(CC)"
 	$(CC) --version
-	@echo "Makefile.gmk: ----------------------- General information End -----------------------------------------"
+	@echo "VPATH = $(VPATH)"
+	@echo  "FILES = $(FILES)"
+	@echo  "SRC_FILES = $(SRC_FILES)"
+	@echo  "OBJ_FILES = $(OBJ_FILES)"
+	@echo  "OBJ_FILES_WITH_PATH = $(OBJ_FILES_WITH_PATH)"
+	@echo " ----------------------- General information End -----------------------------------------"
 
 MKDIRS:
-	@echo "Makefile.gmk: ----------------------- Making directories started-----------------------------------------"
+	@echo " ----------------------- Making directories started-----------------------------------------"
 	-$(shell mkdir $(obj_dir))
-	@echo "Makefile.gmk: ----------------------- Making directories finished-----------------------------------------"
+	@echo " ----------------------- Making directories finished-----------------------------------------"
 
-$(target_dir)Application:  $(obj_dir)$(VSConfig)_Startup.o FaultAndIrqHandlers.o
-	@echo "Makefile.gmk: ----------------------- Building $@ -----------------------------------------"
-	$(CC) $(CFLAGS) $(LFLAGS) $@ $^
+$(target_dir)Application:  $(OBJ_FILES)
+	@echo " ----------------------- Building $@ -----------------------------------------"
+	$(CC) $(CFLAGS) $(LFLAGS) $@ $(OBJ_FILES_WITH_PATH)
 	$(OBJ_CPY) -O ihex -j .data -j .text $@ $@.hex
 	$(OBJ_CPY) -O srec $@ $@.srec
-	@echo "Makefile.gmk: ----------------------- Building $@  Finished--------------------------------"
+	@echo " ----------------------- Building $@  Finished--------------------------------"
 
-$(obj_dir)%.o: %.c
-	@echo "Makefile.gmk: ---------------- compiling file  $^  ------------------------"
-	$(CC) $(CFLAGS) -c $^ -o  $@
-	$(OBJ_DMP) -h $@
-	@echo "Makefile.gmk: -----------------Compilation Finished -----------------------"
+$(OBJ_FILES): %.o: %.c
+	@echo " ---------------- compiling file  $^  ------------------------"
+	$(CC) $(CFLAGS) -c $^ -o  $(obj_dir)$@
+	#$(OBJ_DMP) -h $(obj_dir)$@
+	@echo " -----------------Compilation Finished -----------------------"
 
 READ_ARDUINO_FLASH:
-	@echo "Makefile.gmk: ---------------- Reading from ARDUINO START ------------------------"
+	@echo " ---------------- Reading from ARDUINO START ------------------------"
 	$(AVRDD) $(AVRDD_RFLAG)-n -U flash:r:$(target_dir)flash.bin:r
-	@echo "Makefile.gmk: ---------------- Reading from ARDUINO END ------------------------"
+	@echo " ---------------- Reading from ARDUINO END ------------------------"
 
 WRITE_ARDUINO_FLASH:
-	@echo "Makefile.gmk: ---------------- Writing ARDUINO Flash START ------------------------"
+	@echo " ---------------- Writing ARDUINO Flash START ------------------------"
 	$(AVRDD) $(AVRDD_RFLAG) -U flash:w:$(target_dir)Application.hex:i
-	@echo "Makefile.gmk: ---------------- Writing ARDUINO Flash END ------------------------"
+	@echo " ---------------- Writing ARDUINO Flash END ------------------------"
 
 WRITE_ARM_FLASH:
-	@echo "Makefile.gmk: ---------------- Writing ARM Flash START ------------------------"
+	@echo " ---------------- Writing ARM Flash START ------------------------"
 	@echo "Writing Arm Flash is not yet developed !!"
-	@echo "Makefile.gmk: ---------------- Writing ARM Flash END ------------------------"
+	@echo " ---------------- Writing ARM Flash END ------------------------"
 
 Clean:
-	@echo "Makefile.gmk: ---------------- Cleaning build START------------------------"
+	@echo " ---------------- Cleaning build START------------------------"
 	rm -rf $(patsubst \,/,$(obj_dir))\*.o
 	rm -rf $(patsubst \,/,$(target_dir))\*
-	@echo "Makefile.gmk: ---------------- Cleaning build Finished------------------------"
+	@echo " ---------------- Cleaning build Finished------------------------"

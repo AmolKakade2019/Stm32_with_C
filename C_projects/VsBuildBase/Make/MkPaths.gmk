@@ -2,8 +2,7 @@ current_dir=$(shell pwd)
 obj_dir = $(subst \,/,$(current_dir))/../Obj/$(VSConfig)/
 target_dir = $(subst \,/,$(current_dir))/../bin/$(VSConfig)/
 
-src_path = $(subst \,/,$(current_dir))/../CodeSrc/$(VSConfig)/src;.;
+src_path = $(subst \,/,$(current_dir))/../CodeSrc/$(VSConfig)/src; /$(obj_dir); /$(target_dir);
 obj_dir_path = ../Obj/$(VSConfig)/
 VPATH=$(src_path)
-
-
+$(warning  MkPaths.gmk included !)

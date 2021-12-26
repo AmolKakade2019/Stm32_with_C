@@ -1,0 +1,35 @@
+
+#-flto -ffreestanding 
+ARM_GCC=arm-none-eabi-gcc
+ARM_CFLAGS = -mcpu=cortex-m4 -mthumb -std=gnu11 -nostdlib -Wall
+ARM_LFLAGS = -Wl,-Map=$@.map -Wl,-nostdlib -T ARM_Application.ld -o
+ARM_OBJ_DMP = arm-none-eabi-objdump
+ARM_OBJ_CPY = arm-none-eabi-objcopy
+
+AVR_GCC = avr-gcc
+AVR_CFLAGS = -O0 -DF_CPU=16000000UL -mmcu=atmega328p --std=c99 -nostdlib -Wall
+AVR_LFLAGS = -Wl,-Map=$@.map -Wl,-verbose -o
+AVR_OBJ_DMP = avr-objdump
+AVR_OBJ_CPY = avr-objcopy
+
+AVRDD = avrdude
+AVRDD_RFLAG = -c arduino -p ATMEGA328P -P COM3 
+
+ifeq ($(HwPlatform),ARM)
+	CC=$(ARM_GCC)
+	CFLAGS=$(ARM_CFLAGS)
+	LFLAGS=$(ARM_LFLAGS)
+	OBJ_DMP = $(ARM_OBJ_DMP)
+	OBJ_CPY = $(ARM_OBJ_CPY)
+	FLASH_APP = WRITE_ARM_FLASH
+else ifeq ($(HwPlatform),AVR)
+	CC=$(AVR_GCC)
+	CFLAGS=$(AVR_CFLAGS)
+	LFLAGS=$(AVR_LFLAGS)
+	OBJ_DMP = $(AVR_OBJ_DMP)
+	OBJ_CPY = $(AVR_OBJ_CPY)
+	FLASH_APP = WRITE_ARDUINO_FLASH
+else
+	CC=UNDEF_CC
+endif
+$(warning  MkPlatformDefinitions.gmk included !)

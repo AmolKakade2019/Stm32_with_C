@@ -245,7 +245,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CodeSrc\ARM_Application\inc\ARM_Startup.h" />
-    <ClInclude Include="..\CodeSrc\ARM_Application\inc\EcuMemoryMap.h" />
+    <ClInclude Include="..\CodeSrc\ARM_Application\inc\Stm32_MemoryMap.h" />
+    <ClInclude Include="Header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

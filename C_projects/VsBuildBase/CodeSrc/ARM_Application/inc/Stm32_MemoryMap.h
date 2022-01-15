@@ -1,6 +1,10 @@
 #pragma once
+#ifndef STM32_MEMORYMAP_H
+#define STM32_MEMORYMAP_H
+
 #define SRAM_START 0x20000000
 #define SRAM_SIZE (128U*1024U) //128KB
 #define SRAM_END ((SRAM_START) + (SRAM_SIZE))
-
 #define STACK_START SRAM_END
+
+#endif

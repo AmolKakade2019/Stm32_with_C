@@ -3,9 +3,9 @@
 #define ARM_STARTUP_H
 
 void Default_handler                    (void)    __attribute__((section(".text")));
-void Reset_Handler                      (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
+void Reset_Handler                      (void)    __attribute__((section(".text")));
 void NMI_Handler                        (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
-void HardFault_Handler                  (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
+void HardFault_Handler                  (void)    __attribute__((section(".text")));
 void MemManage_Handler                  (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
 void BusFault_Handler                   (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
 void UsageFault_Handler                 (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
@@ -99,7 +99,5 @@ void HDMI_IRQ__Handler                  (void)    __attribute__((weak, section("
 void SPDIF_IRQ__Handler                 (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
 void FMPI2C1_IRQ__Handler               (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
 void FMPI2C1_error_IRQ__Handler         (void)    __attribute__((weak, section(".text"), alias("Default_handler")));
-
-
-
+void main                               (void)    __attribute__((section(".text")));
 #endif

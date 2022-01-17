@@ -2,9 +2,15 @@
 #include"..\inc\Stm32_MemoryMap.h"
 #include"..\inc\ARM_Startup.h"
 
+extern uint32_t _stext;
+extern uint32_t _etext;
+extern uint32_t _sdata;
+extern uint32_t _edata;
+extern uint32_t _sbss;
+extern uint32_t _ebss;
+uint8_t applicationLabel[]                        __attribute__((section(".AppLabel"))) = { "MyApplication_000_" };
 uint32_t stm32_Vectortable[]                      __attribute__((section(".isr_vector"))) = {
-    STACK_START                                   ,// Address 0x0
-    0                                             ,// Address 0x0
+    (uint32_t)STACK_START                                   ,// Address 0x0
     (uint32_t)&Reset_Handler                      ,// Address 0x4
     (uint32_t)&NMI_Handler                        ,// Address 0x8
     (uint32_t)&HardFault_Handler                  ,// Address 0xc
@@ -119,10 +125,39 @@ uint32_t stm32_Vectortable[]                      __attribute__((section(".isr_v
     (uint32_t)&FMPI2C1_error_IRQ__Handler         ,// Address 0x1c0
 };
 
-void Reset_handler(void)
+void Reset_Handler(void)
 {
+    uint32_t _text_section_size = (uint32_t)&_etext - (uint32_t)&_stext;
+    uint32_t _data_section_size = (uint32_t)&_edata - (uint32_t)&_sdata;
+    uint32_t _bss_section_size  = (uint32_t)&_ebss -  (uint32_t)&_sbss;
+        
+    // Copy .data Section to SRAM
+    uint8_t* pDest = (uint8_t*)&_sdata;
+    uint8_t* pSrc =  (uint8_t*)&_etext;
+    for (uint32_t i = 0; i < _data_section_size; i++)
+    {
+        *pDest++ = *pSrc++;
+    }
+
+    // Init .bss section to 0 in SRAM
+    pDest = (uint8_t*)&_sbss;
+    for (uint32_t i = 0; i < _bss_section_size; i++)
+    {
+        *pDest++ = 0;
+    }
+
+    // Call Main
+    main();
 }
 
 void Default_handler(void)
+{
+    while (1)
+    {
+        
+    }
+}
+
+void HardFault_Handler(void)
 {
 }

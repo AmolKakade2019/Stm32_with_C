@@ -1,7 +1,8 @@
 
 SRC_FILES := $(SRC_FILES) \
             $(subst \,/,$(current_dir))/../CodeSrc/$(VSConfig)/src/ARM_Application_Startup \
-            $(subst \,/,$(current_dir))/../CodeSrc/$(VSConfig)/src/FaultAndIrqHandlers
+            $(subst \,/,$(current_dir))/../CodeSrc/$(VSConfig)/src/FaultAndIrqHandlers\
+            $(subst \,/,$(current_dir))/../CodeSrc/$(VSConfig)/src/Main
 
 $(warning  MkAppFiles.gmk included !)
 

@@ -87,6 +87,9 @@
     <ClCompile Include="..\CodeSrc\Default\src\Initial.c">
       <Filter>CodeSrc\Default\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\CodeSrc\ARM_Application\src\Main.c">
+      <Filter>CodeSrc\ARM_Application\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CodeSrc\ARM_Application\inc\ARM_Startup.h">

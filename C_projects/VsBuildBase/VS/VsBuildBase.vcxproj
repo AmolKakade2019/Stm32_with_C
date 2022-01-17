@@ -240,6 +240,7 @@
   <ItemGroup>
     <ClCompile Include="..\CodeSrc\ARM_Application\src\ARM_Application_Startup.c" />
     <ClCompile Include="..\CodeSrc\ARM_Application\src\FaultAndIrqHandlers.c" />
+    <ClCompile Include="..\CodeSrc\ARM_Application\src\Main.c" />
     <ClCompile Include="..\CodeSrc\AVR_Application\src\AVR_Application_Startup.c" />
     <ClCompile Include="..\CodeSrc\Default\src\Initial.c" />
   </ItemGroup>

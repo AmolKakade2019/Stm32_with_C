@@ -1,0 +1,4 @@
+target extended-remote localhost:3333
+monitor reset halt
+monitor flash list
+monitor flash write_image erase ../bin/ARM_Application/Application.elf

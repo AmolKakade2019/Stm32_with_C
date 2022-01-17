@@ -1,4 +1,4 @@
-.PHONY : INFORMATION MKDIRS Clean all READ_ARDUINO_FLASH Application WRITE_ARDUINO_FLASH WRITE_ARM_FLASH
+.PHONY : INFORMATION MKDIRS Clean all READ_ARDUINO_FLASH Application WRITE_ARDUINO_FLASH WRITE_ARM_FLASH START_OPENOCD READ_ARM_FLASH WRITE_ARM_FLASH
 $(warning  ----------------File includes----------------)
 include MkPlatformDefinitions.gmk
 include MkPaths.gmk
@@ -16,7 +16,7 @@ $(warning  ----------------variable initialization----------------)
 
 $(warning  ----------------variable initialization finished -----)
 
-all : INFORMATION MKDIRS $(target_dir)Application $(FLASH_APP)
+all : INFORMATION MKDIRS $(target_dir)Application $(FLASH_APP) START_OPENOCD
 
 INFORMATION:
 	@echo " ----------------------- General information started-----------------------------------------"
@@ -36,14 +36,15 @@ MKDIRS:
 
 $(target_dir)Application:  $(OBJ_FILES)
 	@echo " ----------------------- Building $@ -----------------------------------------"
-	$(CC) $(CFLAGS) $(LFLAGS) $@ $(OBJ_FILES_WITH_PATH)
-	$(OBJ_CPY) -O ihex -j .data -j .text $@ $@.hex
-	$(OBJ_CPY) -O srec $@ $@.srec
+	$(CC) $(CFLAGS) $(LFLAGS) $@.elf $(OBJ_FILES_WITH_PATH)
+	$(OBJ_CPY) -O ihex -j .data -j .text $@.elf $@.hex
+	$(OBJ_CPY) -O srec $@.elf $@.srec
 	@echo " ----------------------- Building $@  Finished--------------------------------"
 
 $(OBJ_FILES): %.o: %.c
 	@echo " ---------------- compiling file  $^  ------------------------"
 	$(CC) $(CFLAGS) -c $^ -o  $(obj_dir)$@
+	#$(CC) $(CFLAGS) -S -fverbose-asm $^
 	#$(OBJ_DMP) -h $(obj_dir)$@
 	@echo " -----------------Compilation Finished -----------------------"
 
@@ -62,6 +63,11 @@ WRITE_ARM_FLASH:
 	@echo "Writing Arm Flash is not yet developed !!"
 	@echo " ---------------- Writing ARM Flash END ------------------------"
 
+START_OPENOCD: $(target_dir)Application.elf
+	@echo " ---------------- Starting Open OCD ------------------------"	
+	cmd
+	python ../HelperScripts/OpenOcd.py
+	
 Clean:
 	@echo " ---------------- Cleaning build START------------------------"
 	rm -rf $(patsubst \,/,$(obj_dir))\*.o

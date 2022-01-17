@@ -17,4 +17,5 @@ echo BATCH: -------------------- Batch Arguments END   ---------------
 Make -C ./Make/ -f Makefile.gmk %BUILD_CMD% VSConfig=%PrjConfig% HwPlatform=%HW_PLATFORM%
 echo "Batch Finished"
 echo "creating dumps"
+arm-none-eabi-objdump -h ./bin/%PrjConfig%/Application.elf > ./bin/%PrjConfig%/Application.log
 echo BATCH: -------------------- Batch END            --------------- 
